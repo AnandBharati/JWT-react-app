@@ -95,3 +95,13 @@ input{
   font-size: .8rem;
   padding: 5px 20px;
 }
+
+/******error message pop up********/
+.errorMsg{
+  position: absolute;
+  z-index: 1000;
+  padding: 50px;
+  background-color: #ddd;
+  color: #333;
+  outline: 500px solid #111;
+}
