@@ -35,6 +35,9 @@ body{
 
 .login{
   align-self: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 form{
@@ -47,6 +50,16 @@ form{
 input{
   padding: 5px;
   margin-bottom: 10px;
+}
+
+button{
+  background-color: #333;
+  color: #fff;
+  padding: 5px 20px;
+  margin: 10px;
+  border: none;
+  outline: none;
+  border: 2px solid #ddd3;
 }
 
 .home a {
@@ -103,5 +116,5 @@ input{
   padding: 50px;
   background-color: #ddd;
   color: #333;
-  outline: 500px solid #111;
+  outline: 600px solid #000d;
 }

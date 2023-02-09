@@ -10,7 +10,7 @@ function Login({ setToken }) {
   });
 
   const errorMsg = <div className="errorMsg">
-    <p>Error while Sign-up. try again</p>
+    <p>Error while Login. try again</p>
     <button onClick={(e) => setIsError(false)}>Close</button>
   </div>
 
