@@ -25,7 +25,7 @@ const app = express();
 app.use(express.json()); //so that app can accept json in request body
 app.use(cors());
 
-app.listen(process.env.PORT || '5000') 
+app.listen(process.env.PORT || '3000') 
 
 //routing to auth.js
 app.use('/auth', authRouter)
