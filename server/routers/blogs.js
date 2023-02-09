@@ -1,9 +1,7 @@
 const router = require('express').Router();
 const mongoose = require('mongoose');
 const blogModel = require('../models/blogs');
-const jwt = require('jsonwebtoken')
-
-
+const jwt = require('jsonwebtoken');
 
 //middleware to verify token on incoming request
 function authentication(req, res, next) {
