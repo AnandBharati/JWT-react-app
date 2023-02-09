@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import { Link } from 'react-router-dom'
 
 function AddBlog({ userInfo }) {
     const [formData, setFormData] = useState({
@@ -45,7 +46,12 @@ function AddBlog({ userInfo }) {
 
                 <p>createdBy: {userInfo.username} </p>
 
-                <button type='button' onClick={SubmitHandler}>Submit</button>
+                
+
+                <div className='button-container' style={{ display: 'flex', marginTop: '30px' }}>
+                        <button type='button' onClick={SubmitHandler}>Submit</button>
+                        <Link to={'/blogs'}><button> View all Blogs </button></Link>
+                    </div>
             </form>
         </div>
     )
