@@ -35,7 +35,7 @@ function SignUp() {
                     navigate('/login');
                 }
             })
-            .catch((err) => console.log('error', err));
+            .catch((err) => setIsError(true));
     }
 
     return (
