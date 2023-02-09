@@ -20,6 +20,7 @@ const con= connectDB();
 const jwt = require('jsonwebtoken');
 
 const authRouter = require('./routers/auth');
+const blogRouter= require('./routers/blogs');
 
 const app = express();
 app.use(express.json()); //so that app can accept json in request body
@@ -33,3 +34,4 @@ app.get('/',(req, res)=>{
 
 //routing to auth.js
 app.use('/auth', authRouter)
+app.use('/blogs', blogRouter)
