@@ -25,7 +25,7 @@ const app = express();
 app.use(express.json()); //so that app can accept json in request body
 app.use(cors());
 
-const port = process.env.PORT || 3000
+const port = process.env.port || 3000
 app.listen( port, (err)=>{
     !err? console.log('working on port', port) : console.log('error while working', err);
 })
