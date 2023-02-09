@@ -16,7 +16,7 @@ function AddBlog() {
     function SubmitHandler() {
         const token = localStorage.getItem('token');        
         setFormData({ ...formData, createdOn: Date.now() })//setting up date
-        localStorage.getItem('username').username &&
+        localStorage.getItem('username') &&
             fetch('https://sore-gray-oyster-coat.cyclic.app/blogs/new', {
                 method: 'POST',
                 headers: {
@@ -44,7 +44,7 @@ function AddBlog() {
                     value={formData.desc}
                     onChange={(e) => changeHandler('desc', e.target.value)} />
 
-                <p>createdBy: {localStorage.getItem('username').username} </p>
+                <p>createdBy: {localStorage.getItem('username')} </p>
 
                 
 

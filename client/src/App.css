@@ -176,6 +176,16 @@ button{
   color: #ddd;
   padding: 5px 20px;
   margin: 0;
+
+  display: flex;
+  justify-content: space-between;
+}
+.blog h4 span{
+  color: #ddd5;
+}
+
+.blog h4 span:hover{
+  color: crimson;
 }
 
 .blog .desc{
@@ -187,6 +197,12 @@ button{
 .blog i{
   font-size: .8rem;
   padding: 5px 20px;
+  color: #3336;
+}
+
+.blog .blogfooter{
+  display: flex;
+  justify-content: space-between;
 }
 
 /******error message pop up********/

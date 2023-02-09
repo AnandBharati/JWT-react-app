@@ -50,7 +50,7 @@ function App() {
               </NavLink>
             </li>
             <li onClick={LogOffHandler}>
-              <NavLink to='/home' className={({ isActive }) => isActive ? 'nav-active' : undefined}              >
+              <NavLink to='/' className={({ isActive }) => isActive ? 'nav-active' : undefined}              >
                 log Off
               </NavLink>
             </li>
@@ -61,7 +61,7 @@ function App() {
 
       <Routes>
         <Route path='/signup' element={token === '' ? <SignUp /> : <Blogs setToken={setToken} />} />
-        <Route path='/login' element={token === '' ? <Login setToken={setToken} setUserInfo={setUserInfo} /> : <Blogs setToken={setToken} />} />
+        <Route path='/login' element={token === '' ? <Login setToken={setToken} /> : <Blogs setToken={setToken} />} />
         <Route path='/blogs' element={token !== '' ? <Blogs setToken={setToken} /> : <Home />} />
         <Route path='/newblog' element={token !== '' ? <AddBlog /> : <Home />} />
         <Route path='/' element={<Home />} />

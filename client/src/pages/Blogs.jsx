@@ -20,15 +20,21 @@ function Blogs({ setToken }) {
       .catch((err) => console.log(err))
   }, [])
 
+  function deleteBlog(blog_id){
+    //fetch operation for delete
+  }
 
   return (
     <div className='blogs'>
       <h1>Blogs</h1>
       {blogs?.map((blog, i) =>
         <div className="blog" key={i}>
-          <h4>{blog.title}</h4>
+          <h4>{blog.title} <span onClick={deleteBlog(blog._id)}>X</span></h4>
           <span className='desc'>{blog.desc}</span>
-          <i>{blog.createdBy}</i>
+          <span className="blogfooter">
+            <i>created on: {blog.createdOn}</i>
+            <i>created by: {blog.createdBy}</i>
+          </span>
         </div>
       )}
 

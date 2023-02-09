@@ -22,11 +22,11 @@ function authentication(req, res, next) {
 
 //to fetch all the blog by user
 router.get('/all', authentication, async (req, res) => {
-    try{
-        const blogs = await blogModel.find({createdBy: req.username})
-        res.json({blogs})
+    try {
+        const blogs = await blogModel.find({ createdBy: req.username })
+        res.json({ blogs })
     }
-    catch(err){
+    catch (err) {
         res.sendStatus(404)
     }
     // const filteredData = blogData.filter((blog) => blog.createdBy === req.username)
@@ -34,24 +34,36 @@ router.get('/all', authentication, async (req, res) => {
 });
 
 //create new blog
-router.post('/new',authentication, async (req, res)=>{
-    const blog={
+router.post('/new', authentication, async (req, res) => {
+    const blog = {
         title: req.body.title,
         desc: req.body.desc,
         createdBy: req.body.createdBy,
         createdOn: req.body.createdOn
     }
 
-    const newBlog = new blogModel({...blog});
+    const newBlog = new blogModel({ ...blog });
 
+    try {
+        const result = await newBlog.save();
+        res.json({ result });
+    }
+    catch (err) {
+        res.json({ err })
+    }
+
+})
+
+
+router.delete('/delete/:id', async (req, res) => {
+    const id = req.params.id;
     try{
-        const result= await newBlog.save();
+        const result = await blogModel.deleteOne({ _id: id });
         res.json({result});
     }
     catch(err){
-        res.json({err})
+        res.sendStatus(404)
     }
-
 })
 
 module.exports = router;
