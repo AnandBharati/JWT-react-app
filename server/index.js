@@ -27,5 +27,9 @@ app.use(cors());
 
 app.listen(process.env.PORT || '3000') 
 
+app.get('/',(req, res)=>{
+    res.json({message: "working"})
+})
+
 //routing to auth.js
 app.use('/auth', authRouter)
