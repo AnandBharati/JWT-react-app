@@ -23,7 +23,7 @@ const authRouter = require('./routers/auth');
 
 const app = express();
 app.use(express.json()); //so that app can accept json in request body
-app.use(cors({origin: '*'}));
+app.use(cors({origin: 'https://jwt-react-test.netlify.app/'}));
 
 const port = process.env.PORT || 3000
 app.listen( port, (err)=>{
