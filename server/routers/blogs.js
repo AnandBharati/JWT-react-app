@@ -5,9 +5,9 @@ const blogModel = require('../models/blogs');
 
 
 //middleware to verify token on incoming request
-function authenication(req, res, next) {
-    const authenication = req.headers.authorization;
-    const token = authenication.split(' ')[1];
+function authentication(req, res, next) {
+    const authentication = req.headers.authorization;
+    const token = authentication.split(' ')[1];
 
     //to verify the token and extract the payloads
     jwt.verify(token, process.env.ACCESS_TOKEN_SECRET, (err, extractedData) => {
@@ -20,7 +20,7 @@ function authenication(req, res, next) {
 }
 
 //to fetch all the blog by user
-router.get('/all', authenication, async (req, res) => {
+router.get('/all', authentication, async (req, res) => {
     try{
         const blogs = await blogModel.find({createdBy: req.username})
         res.json({blogs})
@@ -33,7 +33,7 @@ router.get('/all', authenication, async (req, res) => {
 });
 
 //create new blog
-router.post('/new',authenication, async (req, res)=>{
+router.post('/new',authentication, async (req, res)=>{
     const blog={
         title: req.body.title,
         desc: req.body.desc,

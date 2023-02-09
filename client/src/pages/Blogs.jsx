@@ -12,7 +12,7 @@ function Blogs({ setToken }) {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
-        authorization: `Bearer ${token}`
+        'authorization': `Bearer ${token}`
       }
     })
       .then((resp) => resp.json())
