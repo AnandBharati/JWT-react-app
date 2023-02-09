@@ -2,7 +2,38 @@ const router = require('express').Router();
 const mongoose = require('mongoose');
 const blogModel = require('../models/blogs');
 
-router.post('/newblog', async (req, res)=>{
+
+
+//middleware to verify token on incoming request
+function authenication(req, res, next) {
+    const authenication = req.headers.authorization;
+    const token = authenication.split(' ')[1];
+
+    //to verify the token and extract the payloads
+    jwt.verify(token, process.env.ACCESS_TOKEN_SECRET, (err, extractedData) => {
+        if (err) return res.sendStatus(404) //if err then return
+        //else if token is correct then we will get extractedData
+        console.log(extractedData)
+        req.username = extractedData.username;
+        next();
+    })
+}
+
+//to fetch all the blog by user
+router.get('/all', authenication, async (req, res) => {
+    try{
+        const blogs = await blogModel.find({createdBy: req.username})
+        res.json({blogs})
+    }
+    catch(err){
+        res.json({err})
+    }
+    // const filteredData = blogData.filter((blog) => blog.createdBy === req.username)
+    // res.json({ blogs: filteredData });
+});
+
+//create new blog
+router.post('/newblog',authenication, async (req, res)=>{
     const blog={
         title: req.body.title,
         desc: req.body.desc,

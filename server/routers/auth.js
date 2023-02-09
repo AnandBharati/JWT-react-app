@@ -65,27 +65,6 @@ router.post('/login', async (req, res) => {
     }
 })
 
-//middleware to verify token on incoming request
-function authenication(req, res, next) {
-    const authenication = req.headers.authorization;
-    const token = authenication.split(' ')[1];
-
-    //to verify the token and extract the payloads
-    jwt.verify(token, process.env.ACCESS_TOKEN_SECRET, (err, extractedData) => {
-        if (err) return res.sendStatus(404) //if err then return
-        //else if token is correct then we will get extractedData
-        console.log(extractedData)
-        req.username = extractedData.username;
-        next();
-    })
-}
-
-router.get('/blogs', authenication, (req, res) => {
-    const filteredData = blogData.filter((blog) => blog.createdBy === req.username)
-    res.json({ blogs: filteredData });
-})
-
-
 
 router.post('/tokenization', (req, res) => {
     //authenticate login
