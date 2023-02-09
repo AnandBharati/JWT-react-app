@@ -1,0 +1,12 @@
+POST http://localhost:3000/auth/login
+Content-Type: application/json
+
+{
+    "username": "Anand",
+    "password": "Anand12345"
+}
+
+###
+GET http://localhost:3000/auth/blogs
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IkFuYW5kIiwiZW1haWwiOiJhbmFuZGJoYXJhdGkwNDAyQGdtYWlsLmNvbSIsInBhc3N3b3JkIjoiQW5hbmQxMjM0NSIsImlhdCI6MTY3NTg3NTU3NH0.d7lIJ5or11CKUeoNYL7SY4xxrcYEq3e-BHzu96m2QMU
+Content-Type: application/json
