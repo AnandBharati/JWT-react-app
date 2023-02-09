@@ -14,6 +14,16 @@ function AddBlog({userInfo}) {
 
     function SubmitHandler(){
         //fetch operation for creating new blog
+        fetch('https://sore-gray-oyster-coat.cyclic.app/blogs/newblog', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(formData)
+          })
+          .then((res)=>res.json())
+          .then((result)=>console.log(result))
+          .catch((err)=>console.log(err))
     }
 
     return (

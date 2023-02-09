@@ -13,7 +13,7 @@ router.post('/newblog', async (req, res)=>{
     const newBlog = new blogModel(blog);
 
     try{
-        const result= newBlog.save();
+        const result= await newBlog.save();
         res.json({result});
     }
     catch(err){
