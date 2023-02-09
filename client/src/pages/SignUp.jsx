@@ -17,7 +17,8 @@ function SignUp() {
         fetch('https://vivacious-dove-outfit.cyclic.app/auth/signup/', {
             method: 'POST',
             headers: {
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                'Access-Control-Allow-Origin': 'no-cors'
             },
             body: JSON.stringify(formData)
         }).then((resp) => resp.json())
