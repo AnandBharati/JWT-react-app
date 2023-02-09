@@ -25,8 +25,9 @@ const app = express();
 app.use(express.json()); //so that app can accept json in request body
 app.use(cors({origin: '*'}));
 
-app.listen(process.env.PORT || 3000, (err)=>{
-    !err? console.log('working on port', 3000) : console.log('error while working', err);
+const port = process.env.PORT || 3000
+app.listen( port, (err)=>{
+    !err? console.log('working on port', port) : console.log('error while working', err);
 })
 
 //routing to auth.js
