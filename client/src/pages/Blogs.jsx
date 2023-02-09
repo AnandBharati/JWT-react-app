@@ -20,11 +20,6 @@ function Blogs({ setToken }) {
       .catch((err) => console.log(err))
   }, [])
 
-  function LogOffHandler(e) {
-    localStorage.setItem('token', '');
-    setToken('')
-    navigate('/login')
-  }
 
   return (
     <div className='blogs'>
@@ -38,7 +33,6 @@ function Blogs({ setToken }) {
       )}
 
       <div className='button-container' style={{ display: 'flex', marginTop: '30px' }}>
-        <button type='button' onClick={(e) => LogOffHandler()}>Log off</button>
         <Link to={'/newblog'}><button> Add New Blog </button></Link>
       </div>
 

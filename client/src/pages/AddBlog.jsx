@@ -1,11 +1,11 @@
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 
-function AddBlog({ userInfo }) {
+function AddBlog() {
     const [formData, setFormData] = useState({
         title: '',
         desc: '',
-        createdBy: userInfo.username,
+        createdBy: localStorage.getItem('username'),
         createdOn: '',
     })
 
@@ -14,9 +14,9 @@ function AddBlog({ userInfo }) {
     }
 
     function SubmitHandler() {
-        const token = localStorage.getItem('token')
+        const token = localStorage.getItem('token');        
         setFormData({ ...formData, createdOn: Date.now() })//setting up date
-        userInfo.username &&
+        localStorage.getItem('username').username &&
             fetch('https://sore-gray-oyster-coat.cyclic.app/blogs/new', {
                 method: 'POST',
                 headers: {
@@ -44,7 +44,7 @@ function AddBlog({ userInfo }) {
                     value={formData.desc}
                     onChange={(e) => changeHandler('desc', e.target.value)} />
 
-                <p>createdBy: {userInfo.username} </p>
+                <p>createdBy: {localStorage.getItem('username').username} </p>
 
                 
 

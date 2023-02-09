@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom';
 
-function Login({ setToken, setUserInfo }) {
+function Login({ setToken }) {
   const [isError, setIsError] = useState(false)
   const navigate = useNavigate()
   const [formData, setFormData] = useState({
@@ -31,7 +31,7 @@ function Login({ setToken, setUserInfo }) {
         .then((result) => {
           localStorage.setItem('token', result.token);
           setToken(result.token);
-          setUserInfo({ username: formData.username });
+          localStorage.setItem('username', formData.username);
           navigate('/blogs');
         })
         .catch((err) => setIsError(true))
