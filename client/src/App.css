@@ -44,6 +44,15 @@ body{
   align-items: center;
 }
 
+.addBlog{
+  align-self: center;
+  padding: 30px 50px;
+  border-radius: 10px;
+  background-color: #EFF6EE;
+  color: #007CBE;
+}
+
+
 .homeControls{
   background-color: #EFF6EE;
   color: #0F0A0A;
@@ -66,6 +75,22 @@ form{
 input{
   padding: 5px;
   margin-bottom: 10px;
+  font-size: 1.1rem;
+  border: none;
+  outline: none;
+  border: 2px solid #007CBE33;
+  color: #007CBE;
+}
+
+textarea{
+  padding: 5px;
+  width: 50vw;
+  height: 30vh;
+  font-size: 1.1rem;
+  border: none;
+  outline: none;
+  border: 2px solid #007CBE33;
+  color: #007CBE;
 }
 
 button{
@@ -76,6 +101,7 @@ button{
   border: none;
   outline: none;
   border: 2px solid #ddd3;
+  
 }
 
 .home a {

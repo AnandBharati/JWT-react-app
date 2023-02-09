@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
-import { Navigate, useNavigate } from 'react-router-dom';
+import { Link, Navigate, useNavigate } from 'react-router-dom';
 
-function Blogs({setToken}) {
+function Blogs({ setToken }) {
   const [blogs, setBlogs] = useState([]);
   const navigate = useNavigate()
 
@@ -26,7 +26,6 @@ function Blogs({setToken}) {
     navigate('/login')
   }
 
-
   return (
     <div className='blogs'>
       <h1>Blogs</h1>
@@ -38,7 +37,11 @@ function Blogs({setToken}) {
         </div>
       )}
 
-      <button type='button' onClick={(e) => LogOffHandler()}>Log off</button>
+      <div className='button-container' style={{ display: 'flex', marginTop: '30px' }}>
+        <button type='button' onClick={(e) => LogOffHandler()}>Log off</button>
+        <Link to={'/newblog'}><button> Add New Blog </button></Link>
+      </div>
+
     </div>
   )
 }
