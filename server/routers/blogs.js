@@ -1,6 +1,7 @@
 const router = require('express').Router();
 const mongoose = require('mongoose');
 const blogModel = require('../models/blogs');
+const jwt = require('jsonwebtoken')
 
 
 
