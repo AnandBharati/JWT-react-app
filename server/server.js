@@ -24,11 +24,8 @@ const authRouter = require('./routers/auth');
 const app = express();
 app.use(express.json()); //so that app can accept json in request body
 app.use(cors());
-
-const port = process.env.PORT || 3000
-app.listen( port, (err)=>{
-    !err? console.log('working on port', port) : console.log('error while working', err);
-})
+ 
+app.listen( process.env.PORT || 3000)
 
 //routing to auth.js
 app.use('/auth', authRouter)
