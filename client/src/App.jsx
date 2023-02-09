@@ -17,7 +17,6 @@ function App() {
     localStorage.setItem('token', '');
     localStorage.setItem('username', '');
     setToken('');
-    setUserInfo({username: ''})
     navigate('/login')
   }
 
