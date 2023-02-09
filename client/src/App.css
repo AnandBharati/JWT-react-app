@@ -182,6 +182,7 @@ button{
 }
 .blog h4 span{
   color: #ddd5;
+  cursor: pointer;
 }
 
 .blog h4 span:hover{

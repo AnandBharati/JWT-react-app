@@ -1,7 +1,8 @@
 import React, { useState } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 
 function AddBlog() {
+    const navigate = useNavigate()
     const [formData, setFormData] = useState({
         title: '',
         desc: '',
@@ -26,7 +27,7 @@ function AddBlog() {
                 body: JSON.stringify(formData)
             })
                 .then((res) => res.json())
-                .then((result) => console.log(result))
+                .then((result) => navigate('/blogs'))
                 .catch((err) => console.log(err))
     }
 

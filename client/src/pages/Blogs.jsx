@@ -3,7 +3,8 @@ import { Link, Navigate, useNavigate } from 'react-router-dom';
 
 function Blogs({ setToken }) {
   const [blogs, setBlogs] = useState([]);
-  const navigate = useNavigate()
+  const navigate = useNavigate();
+  const [isDeleted, setIsDeleted] = useState(false)
 
   useEffect(() => {
     const token = localStorage.getItem('token');
@@ -18,10 +19,21 @@ function Blogs({ setToken }) {
       .then((resp) => resp.json())
       .then((result) => setBlogs(result.blogs))
       .catch((err) => console.log(err))
-  }, [])
+  }, [, isDeleted])
 
-  function deleteBlog(blog_id){
+  function deleteBlog(blog_id) {
     //fetch operation for delete
+    const token = localStorage.getItem('token');
+    fetch('https://sore-gray-oyster-coat.cyclic.app/blogs/delete/' + blog_id, {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json',
+        'authorization': `Bearer ${token}`
+      }
+    })
+      .then((resp) => resp.json())
+      .then((result) => setIsDeleted(!isDeleted))
+      .catch((err) => console.log(err))
   }
 
   return (
@@ -29,7 +41,7 @@ function Blogs({ setToken }) {
       <h1>Blogs</h1>
       {blogs?.map((blog, i) =>
         <div className="blog" key={i}>
-          <h4>{blog.title} <span onClick={deleteBlog(blog._id)}>X</span></h4>
+          <h4>{blog.title} <span onClick={() => deleteBlog(blog._id)}>X</span></h4>
           <span className='desc'>{blog.desc}</span>
           <span className="blogfooter">
             <i>created on: {blog.createdOn}</i>
