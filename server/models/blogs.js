@@ -7,4 +7,4 @@ const blogSchema = {
     createdOn: {type: Date, require: true},
 }
 
-module.exports = new mongoose.model('blog', blogSchema)
+module.exports = new mongoose.model('blog', blogSchema);

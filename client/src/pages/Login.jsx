@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom';
 
-function Login({ setToken , setUserInfo}) {
+function Login({ setToken, setUserInfo }) {
   const [isError, setIsError] = useState(false)
   const navigate = useNavigate()
   const [formData, setFormData] = useState({
@@ -20,22 +20,21 @@ function Login({ setToken , setUserInfo}) {
 
   function loginHandler() {
     // fetch('http://localhost:3000/auth/login', {
-    fetch('https://sore-gray-oyster-coat.cyclic.app/auth/login', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(formData)
-    })
-      .then((resp) => resp.json())
-      .then((result) => {
-        localStorage.setItem('token', result.token);
-        setToken(result.token);
-        setUserInfo({username: formData.username });
-        navigate('/blogs');
-      }
-      )
-      .catch((err) => setIsError(true))
+      fetch('https://sore-gray-oyster-coat.cyclic.app/auth/login', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData)
+      })
+        .then((resp) => resp.json())
+        .then((result) => {
+          localStorage.setItem('token', result.token);
+          setToken(result.token);
+          setUserInfo({ username: formData.username });
+          navigate('/blogs');
+        })
+        .catch((err) => setIsError(true))
   }
 
   return (

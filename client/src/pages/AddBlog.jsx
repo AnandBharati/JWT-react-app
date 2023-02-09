@@ -1,29 +1,31 @@
 import React, { useState } from 'react'
 
-function AddBlog({userInfo}) {
+function AddBlog({ userInfo }) {
     const [formData, setFormData] = useState({
         title: '',
         desc: '',
-        createdBy: '',
+        createdBy: userInfo.username,
         createdOn: '',
     })
 
-    function changeHandler(field,value){
-        setFormData({...formData, [field]: value})
+    function changeHandler(field, value) {
+        setFormData({ ...formData, [field]: value })
     }
 
-    function SubmitHandler(){
+    function SubmitHandler() {
         //fetch operation for creating new blog
-        fetch('https://sore-gray-oyster-coat.cyclic.app/blogs/newblog', {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(formData)
-          })
-          .then((res)=>res.json())
-          .then((result)=>console.log(result))
-          .catch((err)=>console.log(err))
+        setFormData({ ...formData, createdOn: Date.now() })//setting up date
+        userInfo.username &&
+            fetch('https://sore-gray-oyster-coat.cyclic.app/blogs/newblog', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(formData)
+            })
+                .then((res) => res.json())
+                .then((result) => console.log(result))
+                .catch((err) => console.log(err))
     }
 
     return (
@@ -39,7 +41,7 @@ function AddBlog({userInfo}) {
                     placeholder='Enter description'
                     value={formData.desc}
                     onChange={(e) => changeHandler('desc', e.target.value)} />
-                
+
                 <p>createdBy: {userInfo.username} </p>
 
                 <button type='button' onClick={SubmitHandler}>Submit</button>

@@ -10,7 +10,7 @@ router.post('/newblog', async (req, res)=>{
         createdOn: req.body.createdOn
     }
 
-    const newBlog = new blogModel(blog);
+    const newBlog = new blogModel({...blog});
 
     try{
         const result= await newBlog.save();
