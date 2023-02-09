@@ -8,7 +8,7 @@ mongoose.set('strictQuery', false);
 //database connection
 async function connectDB(){
     try{
-        const con= await mongoose.connect('mongodb://localhost:27017/newAuthDB')
+        const con= await mongoose.connect('mongodb+srv://Anand:Anand12345@cluster0.t1nmhac.mongodb.net/test-jwt')
         return con;
     }
     catch{

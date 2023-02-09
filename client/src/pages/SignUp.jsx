@@ -14,7 +14,7 @@ function SignUp() {
     function submitHandler(e) {
         // e.preventDefault();
         console.log('inside submit handller')
-        fetch('http://localhost:3000/auth/signup/', {
+        fetch('https://vivacious-dove-outfit.cyclic.app/auth/signup/', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
