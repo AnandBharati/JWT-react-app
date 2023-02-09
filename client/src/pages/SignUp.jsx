@@ -14,7 +14,7 @@ function SignUp() {
     function submitHandler(e) {
         // e.preventDefault();
         console.log('inside submit handller')
-        fetch('https://vivacious-dove-outfit.cyclic.app/auth/signup/', {
+        fetch('https://sore-gray-oyster-coat.cyclic.app/auth/signup/', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

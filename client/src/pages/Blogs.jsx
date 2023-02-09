@@ -8,7 +8,7 @@ function Blogs({setToken}) {
   useEffect(() => {
     const token = localStorage.getItem('token');
     // fetch('http://localhost:3000/auth/blogs', {
-    fetch('https://vivacious-dove-outfit.cyclic.app/auth/blogs', {
+    fetch('https://sore-gray-oyster-coat.cyclic.app/auth/blogs', {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',

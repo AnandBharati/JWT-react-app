@@ -14,7 +14,7 @@ function Login({setToken}) {
 
   function loginHandler() {
     // fetch('http://localhost:3000/auth/login', {
-    fetch('https://vivacious-dove-outfit.cyclic.app/auth/login', {
+    fetch('https://sore-gray-oyster-coat.cyclic.app/auth/login', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
