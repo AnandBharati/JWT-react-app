@@ -1,12 +1,18 @@
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom';
 
-function Login({setToken}) {
+function Login({ setToken }) {
+  const [isError, setIsError] = useState(false)
   const navigate = useNavigate()
   const [formData, setFormData] = useState({
     username: '',
     password: ''
   });
+
+  const errorMsg = <div className="errorMsg">
+    <p>Error while Sign-up. try again</p>
+    <button onClick={(e) => setIsError(false)}>Close</button>
+  </div>
 
   function changeHandler(field, value) {
     setFormData({ ...formData, [field]: value });
@@ -28,11 +34,13 @@ function Login({setToken}) {
         navigate('/blogs')
       }
       )
-      .catch((err) => console.log(err))
+      .catch((err) => setIsError(true))
   }
 
   return (
     <div className='login'>
+      {isError && errorMsg}
+
       <form action="POST">
         <h2>Login</h2>
         <input type="text"
