@@ -33,7 +33,7 @@ router.get('/all', authenication, async (req, res) => {
 });
 
 //create new blog
-router.post('/newblog',authenication, async (req, res)=>{
+router.post('/new',authenication, async (req, res)=>{
     const blog={
         title: req.body.title,
         desc: req.body.desc,

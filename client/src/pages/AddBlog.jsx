@@ -13,13 +13,14 @@ function AddBlog({ userInfo }) {
     }
 
     function SubmitHandler() {
-        //fetch operation for creating new blog
+        const token = localStorage.getItem('token')
         setFormData({ ...formData, createdOn: Date.now() })//setting up date
         userInfo.username &&
-            fetch('https://sore-gray-oyster-coat.cyclic.app/blogs/newblog', {
+            fetch('https://sore-gray-oyster-coat.cyclic.app/blogs/new', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
+                    'authorization': `Bearer ${token}`
                 },
                 body: JSON.stringify(formData)
             })
