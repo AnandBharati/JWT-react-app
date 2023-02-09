@@ -55,7 +55,7 @@ router.post('/new', authentication, async (req, res) => {
 })
 
 
-router.delete('/delete/:id', async (req, res) => {
+router.delete('/delete/:id',authentication, async (req, res) => {
     const id = req.params.id;
     try{
         const result = await blogModel.deleteOne({ _id: id });
