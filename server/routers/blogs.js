@@ -26,7 +26,7 @@ router.get('/all', authenication, async (req, res) => {
         res.json({blogs})
     }
     catch(err){
-        res.json({err})
+        res.sendStatus(404)
     }
     // const filteredData = blogData.filter((blog) => blog.createdBy === req.username)
     // res.json({ blogs: filteredData });
