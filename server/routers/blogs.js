@@ -12,7 +12,7 @@ function authentication(req, res, next) {
     jwt.verify(token, process.env.ACCESS_TOKEN_SECRET, (err, extractedData) => {
         if (err) return res.sendStatus(404) //if err then return
         //else if token is correct then we will get extractedData
-        console.log(extractedData)
+        console.log(extractedData);
         req.username = extractedData.username;
         next();
     })
