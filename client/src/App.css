@@ -166,7 +166,8 @@ button{
 .blog{
   background-color: #ddd;
   color: #333;
-  width: 500px;
+  min-width: 95vh;
+  max-width: 450px;
   margin: 30px;
 }
 
