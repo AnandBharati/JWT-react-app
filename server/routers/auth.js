@@ -51,6 +51,9 @@ router.get('/refreshtoken', (req, res) => {
     const authentication = req.headers.authorization;
     const refreshToken = authentication.split(' ')[1];
 
+    console.log('##### existing refresh tokens#####')
+    console.log(refreshTokens)
+
     if (refreshTokens.length === 0) {
         return res.sendStatus(404);
     }

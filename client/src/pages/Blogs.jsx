@@ -17,9 +17,35 @@ function Blogs({ setToken }) {
       }
     })
       .then((resp) => resp.json())
-      .then((result) => setBlogs(result.blogs))
-      .catch((err) => console.log(err))
+      .then((result) => {
+        if (result.err)
+          refreshToken();
+        else
+          setBlogs(result.blogs);
+      })
+      .catch((err) => console.log('error occured', err))
   }, [, isDeleted])
+
+  function refreshToken() {
+    const _refreshToken = localStorage.getItem('refreshToken');
+    fetch('https://sore-gray-oyster-coat.cyclic.app/auth/refreshtoken', {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        'authorization': `Bearer ${_refreshToken}`
+      }
+    })
+      .then((resp) => {
+        console.log({resp})
+        return resp.json()
+      })
+      .then((result) => {
+        console.log({result})
+        setToken(result.token)
+        localStorage.setItem('token', result.token);
+      })
+      .catch((err) => console.log(err))
+  }
 
   function deleteBlog(blog_id) {
     //fetch operation for delete

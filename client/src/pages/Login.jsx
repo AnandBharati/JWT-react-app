@@ -30,6 +30,7 @@ function Login({ setToken }) {
         .then((resp) => resp.json())
         .then((result) => {
           localStorage.setItem('token', result.token);
+          localStorage.setItem('refreshToken', result.refreshToken);
           setToken(result.token);
           localStorage.setItem('username', formData.username);
           navigate('/blogs');

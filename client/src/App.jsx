@@ -11,6 +11,7 @@ import SignUp from './pages/SignUp'
 function App() {
   const navigate = useNavigate()
   const [token, setToken] = useState(localStorage.getItem('token'));
+  const [refreshToken, setRefreshToken] = useState(localStorage.getItem('refreshToken'));
   // const [userInfo, setUserInfo] = useState({ username: '' });
 
   function LogOffHandler(e) {
