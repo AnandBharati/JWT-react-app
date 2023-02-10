@@ -1,6 +1,7 @@
 const router = require('express').Router();
 const jwt = require('jsonwebtoken');
 const userModel = require('../models/users');
+const refreshTokenModel = require('../models/refreshToken');
 const blogData = require('../data');
 const { json } = require('express');
 
@@ -33,7 +34,8 @@ router.post('/login', async (req, res) => {
                 //creating token so that it can be send to Client
                 const signedToken = jwt.sign(payload, process.env.ACCESS_TOKEN_SECRET, { expiresIn: '30s' })
                 const refreshToken = jwt.sign(payload, process.env.REFRESH_TOKEN_SECRET)
-                refreshTokens.push(refreshToken);
+
+                insertRefreshToken(result.username, refreshToken) //insert refreshed token to DB
                 return res.json({ token: signedToken, refreshToken })
             }
             else {
@@ -47,17 +49,20 @@ router.post('/login', async (req, res) => {
 })
 
 
-router.get('/refreshtoken', (req, res) => {
+router.post('/refreshtoken', (req, res) => {
     const authentication = req.headers.authorization;
     const refreshToken = authentication.split(' ')[1];
+    //fetch all existing tokens from database
+    const allRefreshedTokens = getRefreshToken(req.body.user)
+    console.log('#### existing tokens ######');
+    console.log(allRefreshedTokens);
 
-    console.log('##### existing refresh tokens#####')
-    console.log(refreshTokens)
-
-    if (refreshTokens.length === 0) {
+    if (allRefreshedTokens.length === 0) {
+        console.log('no refresh token in database')
         return res.sendStatus(404);
     }
-    else if (!refreshTokens.includes(refreshToken)) {
+    else if (!allRefreshedTokens.includes(refreshToken)) {
+        console.log('matching refresh token not found in database')
         return res.sendStatus(401);
     }
     else {
@@ -70,5 +75,29 @@ router.get('/refreshtoken', (req, res) => {
 
     // const signedToken = jwt.sign()
 });
+
+
+async function insertRefreshToken(user, refreshToken) {
+    const newToken = new refreshTokenModel({
+        'username': user,
+        'refreshToken': refreshToken
+    })
+    try {
+        const result = await newToken.save();
+        return result
+    } catch (error) {
+        return error
+    }
+}
+
+async function getRefreshToken(user) {
+    try {
+        const result = await refreshTokenModel.find({ username: user })
+        return result
+    } catch (error) {
+        return error
+    }
+
+}
 
 module.exports = router;
