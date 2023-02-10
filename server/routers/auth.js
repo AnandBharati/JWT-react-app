@@ -54,27 +54,27 @@ router.post('/refreshtoken', (req, res) => {
     const refreshToken = authentication.split(' ')[1];
     //fetch all existing tokens from database
     let allRefreshedTokens = []
-    getRefreshToken(req.body.user).then((result)=>allRefreshedTokens=result);
-    
-    console.log('#### existing tokens ######');
-    console.log(allRefreshedTokens);
+    getRefreshToken(req.body.user).then((result) => {
+        allRefreshedTokens = result
+        console.log('#### existing tokens ######')
+        console.log(allRefreshedTokens)
 
-    if (allRefreshedTokens.length === 0) {
-        console.log('no refresh token in database')
-        return res.sendStatus(404);
-    }
-    else if (!allRefreshedTokens.includes(refreshToken)) {
-        console.log('matching refresh token not found in database')
-        return res.sendStatus(401);
-    }
-    else {
-        jwt.verify(refreshToken, process.env.REFRESH_TOKEN_SECRET, (err, payload) => {
-            const data = { username: payload.username, email: payload.email, password: payload.password };
-            const signedToken = jwt.sign(data, process.env.REFRESH_TOKEN_SECRET, { expiresIn: '30s' })
-            return res.json({ token: signedToken, refreshToken })
-        })
-    }
-
+        if (allRefreshedTokens.length === 0) {
+            console.log('no refresh token in database')
+            return res.sendStatus(404);
+        }
+        else if (!allRefreshedTokens.includes(refreshToken)) {
+            console.log('matching refresh token not found in database')
+            return res.sendStatus(401);
+        }
+        else {
+            jwt.verify(refreshToken, process.env.REFRESH_TOKEN_SECRET, (err, payload) => {
+                const data = { username: payload.username, email: payload.email, password: payload.password };
+                const signedToken = jwt.sign(data, process.env.REFRESH_TOKEN_SECRET, { expiresIn: '30s' })
+                return res.json({ token: signedToken, refreshToken })
+            })
+        }
+    })
     // const signedToken = jwt.sign()
 });
 
