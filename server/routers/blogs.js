@@ -1,5 +1,4 @@
 const router = require('express').Router();
-const mongoose = require('mongoose');
 const blogModel = require('../models/blogs');
 const jwt = require('jsonwebtoken');
 
@@ -10,9 +9,8 @@ function authentication(req, res, next) {
 
     //to verify the token and extract the payloads
     jwt.verify(token, process.env.ACCESS_TOKEN_SECRET, (err, extractedData) => {
-        if (err) return res.sendStatus(404) //if err then return
+        if (err) return res.json({err}) //if err then return
         //else if token is correct then we will get extractedData
-        console.log(extractedData);
         req.username = extractedData.username;
         next();
     })

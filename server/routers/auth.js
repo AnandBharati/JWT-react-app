@@ -1,7 +1,10 @@
 const router = require('express').Router();
 const jwt = require('jsonwebtoken');
 const userModel = require('../models/users');
-const blogData = require('../data')
+const blogData = require('../data');
+const { json } = require('express');
+
+const refreshTokens = [];
 
 router.post('/signup', (req, res) => {
     const newUser = new userModel({
@@ -12,8 +15,6 @@ router.post('/signup', (req, res) => {
 
     newUser.save((err, doc) => {
         if (err) return res.json({ error: err })
-        console.log(doc);
-        console.log('saved successfully');
         res.json({ data: doc })
     })
 })
@@ -30,8 +31,10 @@ router.post('/login', async (req, res) => {
             if (result.password === password) {
                 const payload = { username: result.username, email: result.email, password: result.password };
                 //creating token so that it can be send to Client
-                const signedToken = jwt.sign(payload, process.env.ACCESS_TOKEN_SECRET, {expiresIn: '15s'})
-                return res.json({ token: signedToken })
+                const signedToken = jwt.sign(payload, process.env.ACCESS_TOKEN_SECRET, { expiresIn: '30s' })
+                const refreshToken = jwt.sign(payload, process.env.REFRESH_TOKEN_SECRET)
+                refreshTokens.push(refreshToken);
+                return res.json({ token: signedToken, refreshToken })
             }
             else {
                 res.sendStatus(401) //unathorized
@@ -44,13 +47,25 @@ router.post('/login', async (req, res) => {
 })
 
 
-// router.post('/tokenization', (req, res) => {
-//     //authenticate login
-//     // const username = req.body.username;
-//     const payload = req.body;
-//     //**here token will ne generated and passed to client so that client can attach it will each request */
-//     const access_token = jwt.sign(payload, process.env.ACCESS_TOKEN_SECRET)
-//     res.json({ token: access_token })
-// });
+router.get('/refreshtoken', (req, res) => {
+    const authentication = req.headers.authorization;
+    const refreshToken = authentication.split(' ')[1];
+
+    if (refreshTokens.length === 0) {
+        return res.sendStatus(404);
+    }
+    else if (!refreshTokens.includes(refreshToken)) {
+        return res.sendStatus(401);
+    }
+    else {
+        jwt.verify(refreshToken, process.env.REFRESH_TOKEN_SECRET, (err, payload) => {
+            const data = { username: payload.username, email: payload.email, password: payload.password };
+            const signedToken = jwt.sign(data, process.env.REFRESH_TOKEN_SECRET, { expiresIn: '30s' })
+            return res.json({ token: signedToken, refreshToken })
+        })
+    }
+
+    // const signedToken = jwt.sign()
+});
 
 module.exports = router;
