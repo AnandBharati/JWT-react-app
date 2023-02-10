@@ -58,7 +58,8 @@ router.post('/refreshtoken', (req, res) => {
     //fetch all existing tokens from database
     let allRefreshedTokens = []
     getRefreshToken(req.body.username).then((result) => {
-        allRefreshedTokens = result
+        result.map((obj)=>allRefreshedTokens.push(obj.refreshToken))
+        
         console.log('#### existing tokens ######')
         console.log({allRefreshedTokens})
 
