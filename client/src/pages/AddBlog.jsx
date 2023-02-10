@@ -30,7 +30,7 @@ function AddBlog() {
                 .then((res) => res.json())
                 .then((result) => {
                     if (result.err) {
-                        refreshToken(fetchAllBlogs);
+                        refreshToken(SubmitHandler);
                         setToken(localStorage.getItem('token'))
                     }
                     else

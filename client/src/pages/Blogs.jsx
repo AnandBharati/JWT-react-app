@@ -46,7 +46,7 @@ function Blogs({ setToken }) {
       .then((resp) => resp.json())
       .then((result) => {
         if (result.err) {
-          refreshToken(fetchAllBlogs);
+          refreshToken(deleteBlog);
           setToken(localStorage.getItem('token'))
         }
         else
