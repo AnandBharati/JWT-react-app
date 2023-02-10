@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
+import refreshToken from '../helpers/refreshToken'
 
 function AddBlog() {
     const navigate = useNavigate()
@@ -15,7 +16,7 @@ function AddBlog() {
     }
 
     function SubmitHandler() {
-        const token = localStorage.getItem('token');        
+        const token = localStorage.getItem('token');
         setFormData({ ...formData, createdOn: Date.now() })//setting up date
         localStorage.getItem('username') &&
             fetch('https://sore-gray-oyster-coat.cyclic.app/blogs/new', {
@@ -27,7 +28,14 @@ function AddBlog() {
                 body: JSON.stringify(formData)
             })
                 .then((res) => res.json())
-                .then((result) => navigate('/blogs'))
+                .then((result) => {
+                    if (result.err) {
+                        refreshToken(fetchAllBlogs);
+                        setToken(localStorage.getItem('token'))
+                    }
+                    else
+                        navigate('/blogs')
+                })
                 .catch((err) => console.log(err))
     }
 
@@ -47,12 +55,12 @@ function AddBlog() {
 
                 <p>createdBy: {localStorage.getItem('username')} </p>
 
-                
+
 
                 <div className='button-container' style={{ display: 'flex', marginTop: '30px' }}>
-                        <button type='button' onClick={SubmitHandler}>Submit</button>
-                        <Link to={'/blogs'}><button> View all Blogs </button></Link>
-                    </div>
+                    <button type='button' onClick={SubmitHandler}>Submit</button>
+                    <Link to={'/blogs'}><button> View all Blogs </button></Link>
+                </div>
             </form>
         </div>
     )

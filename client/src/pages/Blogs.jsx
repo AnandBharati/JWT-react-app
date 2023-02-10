@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { Link, Navigate, useNavigate } from 'react-router-dom';
+import refreshToken from '../helpers/refreshToken'
 
 function Blogs({ setToken }) {
   const [blogs, setBlogs] = useState([]);
@@ -7,6 +8,10 @@ function Blogs({ setToken }) {
   const [isDeleted, setIsDeleted] = useState(false)
 
   useEffect(() => {
+    fetchAllBlogs();
+  }, [, isDeleted])
+
+  function fetchAllBlogs() {
     const token = localStorage.getItem('token');
     // fetch('http://localhost:3000/auth/blogs', {
     fetch('https://sore-gray-oyster-coat.cyclic.app/blogs/all', {
@@ -18,34 +23,14 @@ function Blogs({ setToken }) {
     })
       .then((resp) => resp.json())
       .then((result) => {
-        if (result.err)
-          refreshToken();
+        if (result.err) {
+          refreshToken(fetchAllBlogs);
+          setToken(localStorage.getItem('token'))
+        }
         else
           setBlogs(result.blogs);
       })
       .catch((err) => console.log('error occured', err))
-  }, [, isDeleted])
-
-  function refreshToken() {
-    const _refreshToken = localStorage.getItem('refreshToken');
-    fetch('https://sore-gray-oyster-coat.cyclic.app/auth/refreshtoken', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'authorization': `Bearer ${_refreshToken}`
-      },
-      body: JSON.stringify({username: localStorage.getItem('username')})
-    })
-      .then((resp) => {
-        console.log({resp})
-        return resp.json()
-      })
-      .then((result) => {
-        console.log({result})
-        setToken(result.token)
-        localStorage.setItem('token', result.token);
-      })
-      .catch((err) => console.log(err))
   }
 
   function deleteBlog(blog_id) {
@@ -59,7 +44,14 @@ function Blogs({ setToken }) {
       }
     })
       .then((resp) => resp.json())
-      .then((result) => setIsDeleted(!isDeleted))
+      .then((result) => {
+        if (result.err) {
+          refreshToken(fetchAllBlogs);
+          setToken(localStorage.getItem('token'))
+        }
+        else
+          setIsDeleted(!isDeleted)
+      })
       .catch((err) => console.log(err))
   }
 
