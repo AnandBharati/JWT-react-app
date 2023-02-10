@@ -36,6 +36,9 @@ router.post('/login', async (req, res) => {
                 const refreshToken = jwt.sign(payload, process.env.REFRESH_TOKEN_SECRET)
 
                 insertRefreshToken(result.username, refreshToken) //insert refreshed token to DB
+                .then((result)=>console.log({result}))
+                .catch((error)=>console.log({error}))
+                
                 return res.json({ token: signedToken, refreshToken })
             }
             else {
