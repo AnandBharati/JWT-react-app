@@ -53,7 +53,9 @@ router.post('/refreshtoken', (req, res) => {
     const authentication = req.headers.authorization;
     const refreshToken = authentication.split(' ')[1];
     //fetch all existing tokens from database
-    const allRefreshedTokens = getRefreshToken(req.body.user)
+    let allRefreshedTokens = []
+    getRefreshToken(req.body.user).then((result)=>allRefreshedTokens=result);
+    
     console.log('#### existing tokens ######');
     console.log(allRefreshedTokens);
 

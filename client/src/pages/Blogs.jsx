@@ -29,11 +29,12 @@ function Blogs({ setToken }) {
   function refreshToken() {
     const _refreshToken = localStorage.getItem('refreshToken');
     fetch('https://sore-gray-oyster-coat.cyclic.app/auth/refreshtoken', {
-      method: 'GET',
+      method: 'POST',
       headers: {
         'Content-Type': 'application/json',
         'authorization': `Bearer ${_refreshToken}`
-      }
+      },
+      body: JSON.stringify({username: localStorage.getItem('username')})
     })
       .then((resp) => {
         console.log({resp})
