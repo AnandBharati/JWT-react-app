@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import refreshToken from '../helpers/refreshToken'
 
-function AddBlog() {
+function AddBlog({setToken}) {
     const navigate = useNavigate()
     const [formData, setFormData] = useState({
         title: '',

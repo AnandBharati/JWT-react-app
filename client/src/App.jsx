@@ -63,7 +63,7 @@ function App() {
         <Route path='/signup' element={token === '' ? <SignUp /> : <Blogs setToken={setToken} />} />
         <Route path='/login' element={token === '' ? <Login setToken={setToken} /> : <Blogs setToken={setToken} />} />
         <Route path='/blogs' element={token !== '' ? <Blogs setToken={setToken} /> : <Home />} />
-        <Route path='/newblog' element={token !== '' ? <AddBlog /> : <Home />} />
+        <Route path='/newblog' element={token !== '' ? <AddBlog setToken={setToken} /> : <Home />} />
         <Route path='/' element={<Home />} />
         <Route path='*' element={<h1> Error Occured </h1>} />
       </Routes>
