@@ -38,7 +38,7 @@ router.post('/login', async (req, res) => {
                 insertRefreshToken(result.username, refreshToken) //insert refreshed token to DB
                 .then((result)=>console.log({result}))
                 .catch((error)=>console.log({error}))
-                
+
                 return res.json({ token: signedToken, refreshToken })
             }
             else {
@@ -57,10 +57,10 @@ router.post('/refreshtoken', (req, res) => {
     const refreshToken = authentication.split(' ')[1];
     //fetch all existing tokens from database
     let allRefreshedTokens = []
-    getRefreshToken(req.body.user).then((result) => {
+    getRefreshToken(req.body.username).then((result) => {
         allRefreshedTokens = result
         console.log('#### existing tokens ######')
-        console.log(allRefreshedTokens)
+        console.log({allRefreshedTokens})
 
         if (allRefreshedTokens.length === 0) {
             console.log('no refresh token in database')

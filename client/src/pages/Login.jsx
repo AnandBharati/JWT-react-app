@@ -29,10 +29,11 @@ function Login({ setToken }) {
       })
         .then((resp) => resp.json())
         .then((result) => {
+          console.log({result})
           localStorage.setItem('token', result.token);
           localStorage.setItem('refreshToken', result.refreshToken);
-          setToken(result.token);
           localStorage.setItem('username', formData.username);
+          setToken(result.token);
           navigate('/blogs');
         })
         .catch((err) => setIsError(true))
