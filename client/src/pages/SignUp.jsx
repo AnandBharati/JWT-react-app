@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom';
+import domain from '../helpers/ApiDomain';
 
 function SignUp() {
     const [isError, setIsError] = useState(false)
