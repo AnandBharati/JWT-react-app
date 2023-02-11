@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom';
 
-function Login({ setToken }) {
+function Login({ setToken, setRefreshToken }) {
   const [isError, setIsError] = useState(false)
   const navigate = useNavigate()
   const [formData, setFormData] = useState({
@@ -34,6 +34,7 @@ function Login({ setToken }) {
           localStorage.setItem('refreshToken', result.refreshToken);
           localStorage.setItem('username', formData.username);
           setToken(result.token);
+          setRefreshToken(result.refreshToken);
           navigate('/blogs');
         })
         .catch((err) => setIsError(true))

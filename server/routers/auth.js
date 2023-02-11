@@ -82,7 +82,7 @@ router.post('/refreshtoken', (req, res) => {
     // const signedToken = jwt.sign()
 });
 
-router.post('/logout', async () => {
+router.post('/logout', async (req, res) => {
     const authentication = req.headers.authorization;
     const _refreshToken = authentication.split(' ')[1];
     const result = await refreshTokenModel.deleteOne({ username: req.body.username, refreshToken: _refreshToken });

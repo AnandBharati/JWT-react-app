@@ -10,12 +10,11 @@ import SignUp from './pages/SignUp'
 
 function App() {
   const navigate = useNavigate()
-  const [token, setToken] = useState(localStorage.getItem('token'));
+  const [token, setToken] = useState(localStorage.getItem('token') ?? '');
   const [refreshToken, setRefreshToken] = useState(localStorage.getItem('refreshToken'));
   // const [userInfo, setUserInfo] = useState({ username: '' });
 
   function logoutHandler(e) {
-    const refreshToken = localStorage.getItem('refreshToken');
     const username = localStorage.getItem('username');
 
     fetch('https://sore-gray-oyster-coat.cyclic.app/auth/logout', {
@@ -35,6 +34,7 @@ function App() {
       })
       .catch((error) => {
         console.log(error)
+        navigate('/login')
       })
   }
 
@@ -78,7 +78,7 @@ function App() {
 
       <Routes>
         <Route path='/signup' element={token === '' ? <SignUp /> : <Blogs setToken={setToken} />} />
-        <Route path='/login' element={token === '' ? <Login setToken={setToken} /> : <Blogs setToken={setToken} />} />
+        <Route path='/login' element={token === '' ? <Login setToken={setToken} setRefreshToken={setRefreshToken} /> : <Blogs setToken={setToken} />} />
         <Route path='/blogs' element={token !== '' ? <Blogs setToken={setToken} /> : <Home />} />
         <Route path='/newblog' element={token !== '' ? <AddBlog setToken={setToken} /> : <Home />} />
         <Route path='/' element={<Home />} />
