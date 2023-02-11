@@ -14,11 +14,28 @@ function App() {
   const [refreshToken, setRefreshToken] = useState(localStorage.getItem('refreshToken'));
   // const [userInfo, setUserInfo] = useState({ username: '' });
 
-  function LogOffHandler(e) {
-    localStorage.setItem('token', '');
-    localStorage.setItem('username', '');
-    setToken('');
-    navigate('/login')
+  function logoutHandler(e) {
+    const refreshToken = localStorage.getItem('refreshToken');
+    const username = localStorage.getItem('username');
+
+    fetch('https://sore-gray-oyster-coat.cyclic.app/auth/logout', {
+      method: 'post',
+      headers: {
+        authorization: `Bearer ${refreshToken}`,
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ username })
+    })
+      .then((resp) => resp.json())
+      .then((result) => {
+        localStorage.setItem('token', '');
+        localStorage.setItem('username', '');
+        setToken('');
+        navigate('/login')
+      })
+      .catch((error) => {
+        console.log(error)
+      })
   }
 
   return (
@@ -49,7 +66,7 @@ function App() {
                 Create new
               </NavLink>
             </li>
-            <li onClick={LogOffHandler}>
+            <li onClick={logoutHandler}>
               <NavLink to='/' className={({ isActive }) => isActive ? 'nav-active' : undefined}              >
                 log Off
               </NavLink>

@@ -36,8 +36,8 @@ router.post('/login', async (req, res) => {
                 const refreshToken = jwt.sign(payload, process.env.REFRESH_TOKEN_SECRET)
 
                 insertRefreshToken(result.username, refreshToken) //insert refreshed token to DB
-                .then((result)=>console.log({result}))
-                .catch((error)=>console.log({error}))
+                    .then((result) => console.log({ result }))
+                    .catch((error) => console.log({ error }))
 
                 return res.json({ token: signedToken, refreshToken })
             }
@@ -58,10 +58,10 @@ router.post('/refreshtoken', (req, res) => {
     //fetch all existing tokens from database
     let allRefreshedTokens = []
     getRefreshToken(req.body.username).then((result) => {
-        result.map((obj)=>allRefreshedTokens.push(obj.refreshToken))
-        
+        result.map((obj) => allRefreshedTokens.push(obj.refreshToken))
+
         console.log('#### existing tokens ######')
-        console.log({allRefreshedTokens})
+        console.log({ allRefreshedTokens })
 
         if (allRefreshedTokens.length === 0) {
             console.log('no refresh token in database')
@@ -81,6 +81,13 @@ router.post('/refreshtoken', (req, res) => {
     })
     // const signedToken = jwt.sign()
 });
+
+router.post('/logout', async () => {
+    const authentication = req.headers.authorization;
+    const _refreshToken = authentication.split(' ')[1];
+    const result = await refreshTokenModel.deleteOne({ username: req.body.username, refreshToken: _refreshToken });
+    res.json({ result });
+})
 
 
 async function insertRefreshToken(user, refreshToken) {
