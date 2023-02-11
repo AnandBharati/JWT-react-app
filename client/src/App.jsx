@@ -47,7 +47,7 @@ function App() {
             <li>
               <NavLink to='/signup'
                 className={({ isActive }) => isActive ? 'nav-active' : undefined}>
-                Signup
+                Sign-up
               </NavLink>
             </li>
             <li>
@@ -59,17 +59,17 @@ function App() {
           {token && <>
             <li>
               <NavLink to='/blogs' className={({ isActive }) => isActive ? 'nav-active' : undefined}>
-                All blogs
+                View All
               </NavLink>
             </li>
             <li>
               <NavLink to='/newblog' className={({ isActive }) => isActive ? 'nav-active' : undefined}>
-                Create new
+                New
               </NavLink>
             </li>
             <li onClick={logoutHandler}>
               <NavLink to='/' className={({ isActive }) => isActive ? 'nav-active' : undefined}              >
-                log Off
+                Logout
               </NavLink>
             </li>
           </>
