@@ -9,7 +9,7 @@ function authentication(req, res, next) {
 
     //to verify the token and extract the payloads
     jwt.verify(token, process.env.ACCESS_TOKEN_SECRET, (err, extractedData) => {
-        console.log({err})
+        
         if (err) return res.json({err}) //if err then return
 
         //else if token is correct then we will get extractedData

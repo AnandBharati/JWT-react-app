@@ -36,7 +36,7 @@ function AddBlog({setToken}) {
                     else
                         navigate('/blogs')
                 })
-                .catch((err) => console.log(err))
+                 .catch((err) => console.warn(err))
     }
 
     return (

@@ -30,10 +30,11 @@ function App() {
         localStorage.setItem('token', '');
         localStorage.setItem('username', '');
         setToken('');
+        setRefreshToken('');
         navigate('/login')
       })
       .catch((error) => {
-        console.log(error)
+        
         navigate('/login')
       })
   }

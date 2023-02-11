@@ -28,7 +28,7 @@ router.post('/login', async (req, res) => {
     try {
         const result = await userModel.findOne({ username: username })
         if (result) {
-            console.log(result)
+            
             if (result.password === password) {
                 const payload = { username: result.username, email: result.email, password: result.password };
                 //creating token so that it can be send to Client
@@ -36,8 +36,8 @@ router.post('/login', async (req, res) => {
                 const refreshToken = jwt.sign(payload, process.env.REFRESH_TOKEN_SECRET)
 
                 insertRefreshToken(result.username, refreshToken) //insert refreshed token to DB
-                    .then((result) => console.log({ result }))
-                    .catch((error) => console.log({ error }))
+                    .then((result) => console.warn({ result }))
+                    .catch((error) => console.warn({ error }))
 
                 return res.json({ token: signedToken, refreshToken })
             }
@@ -47,7 +47,7 @@ router.post('/login', async (req, res) => {
         }
     }
     catch (err) {
-        console.log(err)
+        console.warn(err)
     }
 })
 
@@ -60,15 +60,13 @@ router.post('/refreshtoken', (req, res) => {
     getRefreshToken(req.body.username).then((result) => {
         result.map((obj) => allRefreshedTokens.push(obj.refreshToken))
 
-        console.log('#### existing tokens ######')
-        console.log({ allRefreshedTokens })
+        
+        
 
         if (allRefreshedTokens.length === 0) {
-            console.log('no refresh token in database')
             return res.sendStatus(404);
         }
         else if (!allRefreshedTokens.includes(refreshToken)) {
-            console.log('matching refresh token not found in database')
             return res.sendStatus(401);
         }
         else {

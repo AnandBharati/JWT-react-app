@@ -21,7 +21,7 @@ function SignUp() {
 
     function submitHandler(e) {
         // e.preventDefault();
-        console.log('inside submit handller')
+        
         fetch('https://sore-gray-oyster-coat.cyclic.app/auth/signup/', {
             method: 'POST',
             headers: {

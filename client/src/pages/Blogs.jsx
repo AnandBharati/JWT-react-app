@@ -30,7 +30,7 @@ function Blogs({ setToken }) {
         else
           setBlogs(result.blogs);
       })
-      .catch((err) => console.log('error occured', err))
+      .catch((err) => console.warn('error occured', err))
   }
 
   function deleteBlog(blog_id) {
@@ -52,7 +52,7 @@ function Blogs({ setToken }) {
         else
           setIsDeleted(!isDeleted)
       })
-      .catch((err) => console.log(err))
+      .catch((err) => console.warn(err))
   }
 
   return (

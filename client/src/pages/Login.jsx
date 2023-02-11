@@ -29,7 +29,7 @@ function Login({ setToken, setRefreshToken }) {
       })
         .then((resp) => resp.json())
         .then((result) => {
-          console.log({result})
+          
           localStorage.setItem('token', result.token);
           localStorage.setItem('refreshToken', result.refreshToken);
           localStorage.setItem('username', formData.username);

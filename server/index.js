@@ -12,7 +12,7 @@ async function connectDB(){
         return con;
     }
     catch{
-        console.log('error on connection')
+        
     }
 } 
 const con= connectDB();
