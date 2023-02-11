@@ -17,8 +17,6 @@ function AddBlog({setToken}) {
 
     function SubmitHandler() {
         const token = localStorage.getItem('token');
-        // setFormData({ ...formData,  })//setting up date
-        console.log({formData})
         localStorage.getItem('username') &&
             fetch('https://sore-gray-oyster-coat.cyclic.app/blogs/new', {
                 method: 'POST',
