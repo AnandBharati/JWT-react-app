@@ -20,7 +20,7 @@ function Login({ setToken, setRefreshToken }) {
 
   function loginHandler() {
     // fetch('http://localhost:3000/auth/login', {
-      fetch('https://sore-gray-oyster-coat.cyclic.app/auth/login', {
+      fetch(domain+'/auth/login', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

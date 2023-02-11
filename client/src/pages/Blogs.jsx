@@ -14,7 +14,7 @@ function Blogs({ setToken }) {
   function fetchAllBlogs() {
     const token = localStorage.getItem('token');
     // fetch('http://localhost:3000/auth/blogs', {
-    fetch('https://sore-gray-oyster-coat.cyclic.app/blogs/all', {
+    fetch(domain+'/blogs/all', {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
@@ -36,7 +36,7 @@ function Blogs({ setToken }) {
   function deleteBlog(blog_id) {
     //fetch operation for delete
     const token = localStorage.getItem('token');
-    fetch('https://sore-gray-oyster-coat.cyclic.app/blogs/delete/' + blog_id, {
+    fetch(domain+'/blogs/delete/' + blog_id, {
       method: 'DELETE',
       headers: {
         'Content-Type': 'application/json',

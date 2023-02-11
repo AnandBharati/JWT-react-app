@@ -1,6 +1,8 @@
+import domain from './ApiDomain'
+
 function refreshToken(callback) {
     const _refreshToken = localStorage.getItem('refreshToken');
-    fetch('https://sore-gray-oyster-coat.cyclic.app/auth/refreshtoken', {
+    fetch(domain+'/auth/refreshtoken', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

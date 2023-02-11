@@ -22,7 +22,7 @@ function SignUp() {
     function submitHandler(e) {
         // e.preventDefault();
         
-        fetch('https://sore-gray-oyster-coat.cyclic.app/auth/signup/', {
+        fetch(domain+'/auth/signup/', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

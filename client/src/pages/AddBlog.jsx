@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
+import domain from '../helpers/ApiDomain'
 import refreshToken from '../helpers/refreshToken'
 
 function AddBlog({setToken}) {
@@ -18,7 +19,7 @@ function AddBlog({setToken}) {
     function SubmitHandler() {
         const token = localStorage.getItem('token');
         localStorage.getItem('username') &&
-            fetch('https://sore-gray-oyster-coat.cyclic.app/blogs/new', {
+            fetch(domain+'/blogs/new', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
