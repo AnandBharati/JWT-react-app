@@ -17,7 +17,8 @@ function AddBlog({setToken}) {
 
     function SubmitHandler() {
         const token = localStorage.getItem('token');
-        setFormData({ ...formData, createdOn: Date.now() })//setting up date
+        // setFormData({ ...formData,  })//setting up date
+        console.log({formData})
         localStorage.getItem('username') &&
             fetch('https://sore-gray-oyster-coat.cyclic.app/blogs/new', {
                 method: 'POST',
@@ -25,7 +26,7 @@ function AddBlog({setToken}) {
                     'Content-Type': 'application/json',
                     'authorization': `Bearer ${token}`
                 },
-                body: JSON.stringify(formData)
+                body: JSON.stringify({...formData, createdOn: Date.now()})
             })
                 .then((res) => res.json())
                 .then((result) => {
