@@ -1,4 +1,4 @@
-POST http://localhost:8000/auth/login
+GET http://localhost:8000/users/all
 Content-Type: application/json
 
 {
@@ -27,3 +27,8 @@ Content-Type: application/json
 GET https://sore-gray-oyster-coat.cyclic.app/blogs/all
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IkFuYW5kIiwiZW1haWwiOiJhYWEiLCJwYXNzd29yZCI6IjEyMzQ1IiwiaWF0IjoxNjc2MDI1NjI0LCJleHAiOjE2NzYwMjU2Mzl9.xr9-p0xKtc8Z--KaY2qq6NAikdB6R8fo3UbyHREJdUg
 Content-Type: application/json
+
+
+###
+GET https://dummyapi.io/data/v1/user
+app-id : 63e8d08b44501331353bec67
