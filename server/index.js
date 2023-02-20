@@ -26,7 +26,7 @@ const userRouter = require('./routers/users')
 const app = express();
 app.use(express.json()); //so that app can accept json in request body
 app.use(cors({
-    origin: 'http://example.com',
+    origin: '*',
     optionsSuccessStatus: 200
 }));
 
