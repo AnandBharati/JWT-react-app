@@ -6,33 +6,36 @@ const mongoose = require('mongoose');
 mongoose.set('strictQuery', false);
 
 //database connection
-async function connectDB(){
-    try{
-        const con= await mongoose.connect('mongodb+srv://Anand:Anand12345@cluster0.t1nmhac.mongodb.net/test-jwt')
+async function connectDB() {
+    try {
+        const con = await mongoose.connect('mongodb+srv://Anand:Anand12345@cluster0.t1nmhac.mongodb.net/test-jwt')
         return con;
     }
-    catch(err){
+    catch (err) {
         console.log(err)
     }
-} 
-const con= connectDB();
+}
+const con = connectDB();
 
 const jwt = require('jsonwebtoken');
 
 const authRouter = require('./routers/auth');
-const blogRouter= require('./routers/blogs');
-const userRouter= require('./routers/users')
+const blogRouter = require('./routers/blogs');
+const userRouter = require('./routers/users')
 
 const app = express();
 app.use(express.json()); //so that app can accept json in request body
-app.use(cors());
+app.use(cors({
+    origin: 'http://example.com',
+    optionsSuccessStatus: 200
+}));
 
-app.listen(process.env.PORT || '3000', ()=>{
+app.listen(process.env.PORT || '3000', () => {
     console.log('listening to port', process.env.PORT || '3000')
-}) 
+})
 
-app.get('/',(req, res)=>{
-    res.json({message: "working"})
+app.get('/', (req, res) => {
+    res.json({ message: "working" })
 })
 
 //routing to auth.js
